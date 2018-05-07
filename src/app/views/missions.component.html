@@ -1,0 +1,54 @@
+
+<div [ngStyle]="{padding: '25px'}">
+        <h1>{{player.name}}</h1>
+        <h2>
+            Money: {{player.money}}
+            Power: {{player.power}}
+            Chance number test = {{this.chanceNumber}}
+        </h2>
+        </div>
+<button (click)="getMissions()" class="btn btn-lg btn-primary">Get Missions</button>
+
+
+<ul *ngFor="let mission of this.missions" [ngStyle] = "{padding: '25px'}">
+    <li [ngStyle] = "{listStyleType: 'none'}">
+        <button class="btn btn-danger" 
+        (click)="this.setModal(mission.id)"
+        data-toggle="modal" data-target="#myModal">{{mission.name}}</button>
+    </li>
+</ul>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{currentMissionForModal.name}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {{currentMissionForModal.summary}}
+            </div>
+            <div class="modal-footer">
+                <div class="text-center">
+               Difficulty: {{currentMissionForModal.difficulty}} <br>
+                Money Risk:{{currentMissionForModal.moneyAdjustment}} <br>
+                Power Risk: {{currentMissionForModal.powerAdjustment}} <br>
+                    </div>
+                    <br>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close Mission</button>
+              <button (click)="this.setChanceNumber();
+              determineOutcome(this.chanceNumber,currentMissionForModal.difficulty,
+              currentMissionForModal.moneyAdjustment, currentMissionForModal.powerAdjustment)"
+              type="button" class="btn btn-primary">Accept Mission</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+   
+
+
